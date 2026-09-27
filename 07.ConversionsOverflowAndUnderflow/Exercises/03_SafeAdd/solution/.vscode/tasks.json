@@ -1,0 +1,110 @@
+{
+  // =====================================================================
+  //  HOW TO USE (works in ANY folder of this course):
+  //    1. Open the .cpp file you want (e.g. main.cpp).
+  //    2. Press  Ctrl + Shift + B   -> builds AND runs that file's folder.
+  //    3. Press  F5                 -> debug it (breakpoints, step through).
+  //  Every .cpp file in the SAME folder as the open file is compiled
+  //  together into  rooster.exe  (that is why multi-file lessons just work).
+  //  Other tasks: Ctrl+Shift+P -> "Tasks: Run Task".
+  //  Master copy lives in tools/vscode-template. Run tools/sync-vscode.ps1
+  //  after editing it to copy the change into every lesson folder.
+  // =====================================================================
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "C++: Build this folder (GCC)",
+      "type": "cppbuild",
+      "command": "C:\\mingw64\\bin\\g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-std=c++20",
+        "-g",
+        "-O0",
+        "-Wall",
+        "-Wextra",
+        "${fileDirname}\\*.cpp",
+        "-o",
+        "${fileDirname}\\rooster.exe"
+      ],
+      "options": { "cwd": "${fileDirname}" },
+      "problemMatcher": ["$gcc"],
+      "group": "build",
+      "detail": "g++ -std=c++20 with warnings on. Output: rooster.exe"
+    },
+    {
+      "label": "C++: Build & Run this folder",
+      "type": "process",
+      "command": "${fileDirname}\\rooster.exe",
+      "options": { "cwd": "${fileDirname}" },
+      "dependsOn": ["C++: Build this folder (GCC)"],
+      "problemMatcher": [],
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "focus": true, "panel": "shared", "clear": true },
+      "detail": "Ctrl+Shift+B : compile then run. Type your input in the terminal that opens."
+    },
+    {
+      "label": "C++: Build this folder (C++23, GCC)",
+      "type": "cppbuild",
+      "command": "C:\\mingw64\\bin\\g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-std=c++23",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "${fileDirname}\\*.cpp",
+        "-o",
+        "${fileDirname}\\rooster.exe"
+      ],
+      "options": { "cwd": "${fileDirname}" },
+      "problemMatcher": ["$gcc"],
+      "group": "build",
+      "detail": "For the few C++23 extras, e.g. std::expected (marked in the lesson README)."
+    },
+    {
+      "label": "C++: Build & Run this folder (C++23)",
+      "type": "process",
+      "command": "${fileDirname}\\rooster.exe",
+      "options": { "cwd": "${fileDirname}" },
+      "dependsOn": ["C++: Build this folder (C++23, GCC)"],
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": { "reveal": "always", "focus": true, "panel": "shared", "clear": true },
+      "detail": "Same as Build & Run, but with -std=c++23."
+    },
+    {
+      "label": "C++: Build this folder (Clang)",
+      "type": "cppbuild",
+      "command": "C:\\mingw64\\bin\\clang++.exe",
+      "args": [
+        "-fcolor-diagnostics",
+        "-fansi-escape-codes",
+        "-std=c++20",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "${fileDirname}\\*.cpp",
+        "-o",
+        "${fileDirname}\\rooster.exe"
+      ],
+      "options": { "cwd": "${fileDirname}" },
+      "problemMatcher": ["$gcc"],
+      "group": "build",
+      "detail": "Second opinion: Clang often gives friendlier error messages."
+    },
+    {
+      "label": "C++: Build & Run this folder (Optimized -O2)",
+      "type": "shell",
+      "command": "& 'C:\\mingw64\\bin\\g++.exe' -std=c++20 -O2 -Wall -Wextra '${fileDirname}\\*.cpp' -o '${fileDirname}\\rooster.exe'; if ($LASTEXITCODE -eq 0) { & '${fileDirname}\\rooster.exe' }",
+      "options": {
+        "cwd": "${fileDirname}",
+        "shell": { "executable": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"] }
+      },
+      "problemMatcher": ["$gcc"],
+      "group": "build",
+      "presentation": { "reveal": "always", "focus": true, "panel": "shared", "clear": true },
+      "detail": "Fast build + run, for timing and performance lessons (58)."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "files.associations": { "*.ixx": "cpp", "*.cppm": "cpp" },
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.default.compilerPath": "C:/mingw64/bin/g++.exe",
+  "editor.formatOnSave": false,
+  "editor.rulers": [100],
+  "files.exclude": { "**/*.exe": true, "**/*.o": true, "**/gcm.cache": true, "**/*.pcm": true },
+  "markdown.preview.breaks": false
+}

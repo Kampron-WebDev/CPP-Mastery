@@ -1,0 +1,52 @@
+{
+  // =====================================================================
+  //  MODULES chapter (49.Modules): modules need a special build ORDER.
+  //    Ctrl + Shift + B  -> builds this folder's modules with Clang and runs it
+  //  It finds 49.Modules/build-modules.ps1 by walking up from the open file.
+  //  Generated files go into a build\ subfolder next to your code.
+  // =====================================================================
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "C++: Build & Run modules (Clang)",
+      "type": "shell",
+      "command": "$d = '${fileDirname}'; while ($d -and -not (Test-Path (Join-Path $d 'build-modules.ps1'))) { $d = Split-Path $d }; if (-not $d) { Write-Error 'build-modules.ps1 not found'; exit 1 }; & (Join-Path $d 'build-modules.ps1') -Dir '${fileDirname}' -Run",
+      "options": {
+        "cwd": "${fileDirname}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+        }
+      },
+      "problemMatcher": ["$gcc"],
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "focus": true, "panel": "shared", "clear": true },
+      "detail": "Precompiles header units + modules in dependency order, links rooster.exe, runs it."
+    },
+    {
+      "label": "C++: Build modules only (Clang)",
+      "type": "shell",
+      "command": "$d = '${fileDirname}'; while ($d -and -not (Test-Path (Join-Path $d 'build-modules.ps1'))) { $d = Split-Path $d }; & (Join-Path $d 'build-modules.ps1') -Dir '${fileDirname}'",
+      "options": {
+        "cwd": "${fileDirname}",
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+        }
+      },
+      "problemMatcher": ["$gcc"],
+      "group": "build",
+      "detail": "Same as above, without running. Used by F5 (debug)."
+    },
+    {
+      "label": "C++: Build this folder (GCC)",
+      "type": "cppbuild",
+      "command": "C:\\mingw64\\bin\\g++.exe",
+      "args": ["-fdiagnostics-color=always", "-std=c++20", "-g", "-Wall", "-Wextra", "${fileDirname}\\*.cpp", "-o", "${fileDirname}\\rooster.exe"],
+      "options": { "cwd": "${fileDirname}" },
+      "problemMatcher": ["$gcc"],
+      "group": "build",
+      "detail": "For plain (non-module) .cpp folders, e.g. the Template Project."
+    }
+  ]
+}

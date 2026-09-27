@@ -1,0 +1,4 @@
+{
+  // VS Code will offer to install these when you open the folder.
+  "recommendations": ["ms-vscode.cpptools", "ms-vscode.cpptools-extension-pack"]
+}

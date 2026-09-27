@@ -1,0 +1,25 @@
+{
+  // Press F5 with a .cpp file open: builds its folder, then starts the debugger.
+  // Click left of a line number to set a red-dot breakpoint first.
+  // Need command-line arguments (Lesson 18)? Put them in "args", e.g. ["add", "3", "4"].
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug this folder (GDB)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}\\rooster.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
+      "setupCommands": [
+        { "description": "Pretty-print std::vector, std::string, ...", "text": "-enable-pretty-printing", "ignoreFailures": true }
+      ],
+      "preLaunchTask": "C++: Build this folder (GCC)"
+    }
+  ]
+}
