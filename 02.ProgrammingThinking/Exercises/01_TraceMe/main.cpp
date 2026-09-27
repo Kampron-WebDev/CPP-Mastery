@@ -9,12 +9,12 @@ int main()
 {
     int a = 3;
     int b = 4;
-    int c = a + b;   // ?
-    a = c - 1;       // ?
-    b = a * 2;       // ?
-    c = c + a + b;   // ?
+    int c = a + b;   // ? 7
+    a = c - 1;       // ? 6
+    b = a * 2;       // ? 12
+    c = c + a + b;   // ? 25
 
-    int myA = 0, myB = 0, myC = 0;   // TODO: your predictions
+    int myA = 6, myB = 12, myC = 25;   // TODO: your predictions
 
     std::cout << "a: real " << a << " / you " << myA << '\n';
     std::cout << "b: real " << b << " / you " << myB << '\n';
